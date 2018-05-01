@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Rollenbeheer</h2>
+<section class="col-sm-4">
+    <table class="table-bordered">
+        @Html.ActionLink("Nieuwe Rol", "Create", "Role")
+    </table>
+</section>
+<section class="col-sm-4">
+    <table class="table-bordered">
+        @Html.ActionLink("Rol Verwijderen", "Delete", "Role")
+    </table>
+</section>
+<section class="col-sm-4">
+    <table class="table-bordered">
+        @Html.ActionLink("Rol Toewijzen", "RegisterRole", "Account")
+    </table>
+</section>
+<br />
+<table class="table table-bordered table-hover">
+    <tr>
+        <th class="c">
+            Naam Rol
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="c">
+                @item.Name
+            </td>
+        </tr>
+    }
+</table>
+<div class="card-footer postactionlinks">
+    <span class="badge badge-pill badge-dark">@Html.ActionLink("Terug naar Adminpagina", "Index", "Admin")</span>
+</div>
+

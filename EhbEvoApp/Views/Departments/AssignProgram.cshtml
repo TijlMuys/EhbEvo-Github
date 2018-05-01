@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "AssignProgram";
+}
+<h2>Opleiding Toekennen aan Departement</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.Label("Departement", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.DropDownList("DepartmentId", null, "---Kies Departement---", htmlAttributes: new { @class = "form-control", id = "departmentsdropdown" })
+            
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Opleiding", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-12">
+            @Html.DropDownList("ProgramId", null, "---Kies Opleiding---", htmlAttributes: new { @class = "form-control", id = "departmentsdropdown" })
+        </div>
+    </div>
+    <input type="submit" value="Koppel" />
+}
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

@@ -1,0 +1,89 @@
+﻿@model EhbEvoApp.Models.ApplicationUser
+@using EhbEvo.Models;
+@{
+    ViewBag.Title = "EvoPanel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading -->
+    <h1 class="my-4">
+        EvoPanel
+        <small>Overzicht</small>
+    </h1>
+
+    <div class="row row-eq-height">
+        <div class="col-lg-6 portfolio-item">
+            <div class="card h-100">
+                <div class="card-header" id="onderwijsheader"><h5 class="text-white"><span class="span-left">Uploads: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderwijs)).Count()</span><!--<span class="span-right">Score: 300</span>--></h5></div>
+                <div id="evopanel-onderwijs">
+                    <h2>Onderwijs</h2>
+                    <p class="lead">Verbeter de manier van lesgeven en draag bij aan een positieve leeromgeving voor de studenten.</p>
+                    <a href='@Url.Action("Index", "Onderwijs")' class="btn btn-primary btn-lg text-white">Onderwijs &raquo;</a>
+                </div>
+                <div class="card-footer" id="onderwijsfooter">
+                    <div class="row row-eq-height">
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-primary">Ideeën: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderwijs) && p.PostType.Equals(PostType.Idee)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-primary">Plannen: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderwijs) && p.PostType.Equals(PostType.Plan)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-primary">Acties: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderwijs) && p.PostType.Equals(PostType.Actie)).Count()</span></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 portfolio-item">
+            <div class="card h-100">
+                <div class="card-header" id="onderzoekheader"><h5 class="text-white"><span class="span-left">Uploads: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderzoek)).Count()</span><!--<span class="span-right">Score: 300</span>--></h5></div>
+                <div id="evopanel-onderzoek">
+                    <h2>Onderzoek</h2>
+                    <p class="lead">Sta niet stil, verbreed je kennis en ga op zoek naar nieuwe theorieën, technologieën en mogelijkheden.</p>
+                    <a href='@Url.Action("Index", "Onderzoek")' class="btn btn-warning btn-lg text-white">Onderzoek &raquo;</a>
+                </div>
+                <div class="card-footer" id="onderzoekfooter">
+                    <div class="row row-eq-height">
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-warning">Ideeën: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderzoek) && p.PostType.Equals(PostType.Idee)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-warning">Plannen: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderzoek) && p.PostType.Equals(PostType.Plan)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-warning">Acties: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Onderzoek) && p.PostType.Equals(PostType.Actie)).Count()</span></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 portfolio-item">
+            <div class="card h-100">
+                <div class="card-header" id="dienstverleningheader"><h5 class="text-white"><span class="span-left">Uploads: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Dienstverlening)).Count()</span><!--<span class="span-right">Score: 300</span>--></h5></div>
+                <div id="evopanel-dienstverlening">
+                    <h2>Dienstverlening</h2>
+                    <p class="lead">Gebruik je expertise om bij te dragen aan de maatschappij en onze partners, zo kan jij het verschil maken.</p>
+                    <p><a href="@Url.Action("Index", "Dienstverlening")" class="btn btn-success btn-lg text-white">Dienstverlening &raquo;</a></p>
+                </div>
+                <div class="card-footer" id="dienstverleningfooter">
+                    <div class="row row-eq-height">
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-success">Ideeën: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Dienstverlening) && p.PostType.Equals(PostType.Idee)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-success">Plannen: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Dienstverlening) && p.PostType.Equals(PostType.Plan)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-success">Acties: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Dienstverlening) && p.PostType.Equals(PostType.Actie)).Count()</span></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 portfolio-item">
+            <div class="card h-100">
+                <div class="card-header" id="ondernemenheader"><h5 class="text-white"><span class="span-left">Uploads:@Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Ondernemen)).Count()</span><!--<span class="span-right">Score: 300</span>--></div>
+                <div id="evopanel-ondernemen">
+                    <h2>Ondernemen</h2>
+                    <p class="lead">Steek je handen uit de mouwen en organiseer workshops, lezingen of evenementen aan de hogeschool</p>
+                    <p><a href="@Url.Action("Index", "Ondernemen")" class="btn btn-danger btn-lg text-white">Ondernemen &raquo;</a></p>
+                </div>
+                <div class="card-footer" id="ondernemenfooter">
+                    <div class="row row-eq-height">
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-danger">Ideeën: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Ondernemen) && p.PostType.Equals(PostType.Idee)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-danger">Plannen: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Ondernemen) && p.PostType.Equals(PostType.Plan)).Count()</span></p></div>
+                        <div class="col-md-4 text-center"><p class="text-secondary" href="#"><span class="badge badge-pill badge-danger">Acties: @Model.Posts.Where(p => p.PostCategory.Equals(PostCategory.Ondernemen) && p.PostType.Equals(PostType.Actie)).Count()</span></p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

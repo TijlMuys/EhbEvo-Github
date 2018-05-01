@@ -1,0 +1,146 @@
+﻿@model EhbEvo.Models.Post
+@using Microsoft.AspNet.Identity;
+@using EhbEvoApp.Models;
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<!-- Page Content -->
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/EvoPanel">EvoPanel</a></li>
+            <li class="breadcrumb-item"><a href="~/Onderzoek">Onderzoek</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Details</li>
+        </ol>
+    </nav>
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h1 class="mt-4">@Html.DisplayFor(model => model.Title)</h1>
+
+            <!-- Category -->
+            <p>
+                <span class="lead text-warningdark">@Html.DisplayFor(model => model.PostCategory) - @Html.DisplayFor(model => model.PostType)</span><hr>
+                Gepost op <span class="text-secondary">@Html.DisplayFor(model => model.Date)</span> door <span class="text-warning">@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</span>
+            </p>
+
+
+
+            <!-- Date/Time -->
+
+
+            <hr>
+
+            <!-- Preview Image -->
+            <img class="img-fluid rounded img-post" src="@Model.ImgUrl" alt="">
+
+            <hr>
+
+            <!-- Post Content -->
+            @Html.Raw(@Model.Content)
+
+
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <hr />
+
+    @if (Model.Feedback.Count() == 0)
+    {
+        <h3 class="text-warning shadow h3-padding">Feedback</h3><br />
+        <p>Er is nog geen feedback gepost</p>
+    }
+    else
+    {
+        <div id="show-feedback-btn" class="btn-warning btn-lg d-inline-block">Bekijk Feedback</div><hr />
+    }
+    <div id="feedback" hidden="hidden">
+        <h3 class="text-warning shadow h3-padding">Feedback</h3><br />
+        @foreach (var feedbackitem in Model.Feedback)
+        {
+            //only show feedbackitem if owner of post of owner of feedback
+            if (feedbackitem.UserId.Equals(@System.Web.HttpContext.Current.User.Identity.GetUserId()) || Model.UserId.Equals(@System.Web.HttpContext.Current.User.Identity.GetUserId()))
+            {
+                <div class="row">
+                    <!-- Post Content Column -->
+                    <div class="col-lg-8">
+
+                        <!-- Title -->
+                        <h3 class="mt-4 text-warningdark">@feedbackitem.Title</h3>
+                        <p class="lead">
+                            Gepost op <span class="text-secondary">@feedbackitem.Date</span> door <span class="text-dark">@feedbackitem.User.FirstName @feedbackitem.User.LastName</span>
+                            <span class="text-info">
+                                @if (feedbackitem.Rating != null)
+                                {
+                                    <text><span class="text-dark"> - </span> Rating: </text>@feedbackitem.Rating<text>/10</text>
+                                }
+
+                            </span>
+                        </p><hr>
+
+                        <!-- Post Content -->
+                        @Html.Raw(feedbackitem.Content)
+
+
+                        @if (feedbackitem.Comments.Count() == 0)
+                        {
+                           <h5 class="text-warning shadow h3-padding"><span style="color:#212529;">Commentaar</span></h5><br />
+                            <p>Er zijn geen comments op deze feedback</p>
+                            <div class="btn-secondary btn d-inline-block text-white" style="opacity:0.75;">@Html.ActionLink(linkText: "Plaats Commentaar", actionName: "Create", controllerName: "Comments", routeValues: new { feedbackId = feedbackitem.Id }, htmlAttributes: new { @class = "text-white" })</div><hr />
+                        }
+                        else
+                        {
+                            <div id="show-comments-btn" class="btn-secondary btn d-inline-block">Toon Commentaar</div><hr />
+                        }
+
+                        <div id="comments" hidden="hidden">
+                            <h5 class="text-warning shadow h3-padding"><span style="color:#212529;">Commentaar</span></h5><br />
+                            @foreach (var comment in feedbackitem.Comments)
+                            {
+                                <div class="media mt-3">
+                                    <img class="mr-3 feedimage" src="~/Content/images/comment.png">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">@comment.Title - <small class="text-info">@comment.User.FirstName @comment.User.LastName</small><small> op </small><small class="text-secondary">@comment.Date</small></h5>
+                                        @Html.Raw(comment.Content)
+                                    </div>
+                                    <div class="media-right align-self-center">
+                                        @if (comment.User.Id.Equals(@System.Web.HttpContext.Current.User.Identity.GetUserId()) || System.Web.HttpContext.Current.User.IsInRole("Admin"))
+                                        {
+                                            <span class="btn-info btn-sm btn-block text-white text-center" style="opacity:0.75;">@Html.ActionLink(linkText: "Bewerk", actionName: "Edit", controllerName: "Comments", routeValues: new { Id = comment.Id }, htmlAttributes: new { @class = "text-white text-center", style = "width:100%" })</span><br />
+                                            <span class="btn-danger btn-sm btn-block text-white text-center" style="opacity:0.75;">@Html.ActionLink(linkText: "Verwijder", actionName: "Delete", controllerName: "Comments", routeValues: new { Id = comment.Id }, htmlAttributes: new { @class = "text-white text-center", style = "width:100%" })</span>
+                                        }
+                                    </div>
+                                </div><hr />
+                            }
+                            <div class="btn-secondary btn d-inline-block text-white" style="opacity:0.75;">@Html.ActionLink(linkText: "Plaats Commentaar", actionName: "Create", controllerName: "Comments", routeValues: new { feedbackId = feedbackitem.Id }, htmlAttributes: new { @class = "text-white" })</div><hr />
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p><span class="text-warningdark">@feedbackitem.User.FirstName @feedbackitem.User.LastName</span> heeft deze post feedback gegeven op <span class="text-secondary">@feedbackitem.Date</span></p><hr />
+            }
+
+        }
+    </div>
+    <p class="postactionlinksY">
+        <span class="badge badge-pill badge-warning">@Html.ActionLink("Bewerk", "Edit", new { id = Model.Id })</span> |
+        <span class="badge badge-pill badge-warning">@Html.ActionLink("Terug naar overzicht", "Index")</span>
+        <span class="badge badge-pill badge-warning">@Html.ActionLink("Verwijder", "Delete", new { id = Model.Id })</span>
+    </p>
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/js/showhidefeedback.js")
+    @Scripts.Render("~/js/showhidecomments.js")
+}
+

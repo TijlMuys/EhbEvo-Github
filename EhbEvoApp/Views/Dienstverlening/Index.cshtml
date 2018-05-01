@@ -1,0 +1,154 @@
+﻿@model IEnumerable<EhbEvo.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<!-- Page Content -->
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/EvoPanel">EvoPanel</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Dienstverlening</li>
+        </ol>
+    </nav>
+    <!-- Page Heading -->
+    <h1 class="my-4 text-success">
+        <b>Dienstverlening Overzicht</b>
+    </h1>
+
+
+    <div class="btn index-dienstverleningheader">
+        @Html.ActionLink("Post Aanmaken", "Create")
+    </div>
+    <hr />
+    <h3 class="text-success shadow h3-padding">Ideeën</h3>
+    <div class="row">
+        @foreach (var item in Model.Where(p => p.PostType == EhbEvo.Models.PostType.Idee).OrderByDescending(p => p.Date))
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <div class="card-header"><small class="text-success">@item.Date</small></div>
+                    <a href="#"><img class="card-img-top img-thumbpost" src="@item.ImgUrl" alt=""></a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </h5>
+                        <!--<p class="card-text">Html.Raw(item.Content)</p>-->
+                    </div>
+                    <div class="card-footer postactionlinks">
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Bewerk", "Edit", new { id = item.Id })</span> |
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Details", "Details", new { id = item.Id })</span> |
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Verwijder", "Delete", new { id = item.Id })</span>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.Where(p => p.PostType == EhbEvo.Models.PostType.Idee).Count() == 0)
+        {
+            <div class="card border-0">
+                <div class="card-body border-0">
+                    <p class="">Je hebt nog geen Ideeën in verband met dienstverlening gepost.</p>
+                </div>
+
+            </div>
+        }
+    </div>
+    <hr />
+    <h3 class="text-success shadow h3-padding">Plannen</h3>
+    <div class="row">
+        @foreach (var item in Model.Where(p => p.PostType == EhbEvo.Models.PostType.Plan).OrderByDescending(p => p.Date))
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <div class="card-header"><small class="text-success">@item.Date</small></div>
+                    <a href="#"><img class="card-img-top img-thumbpost" src="@item.ImgUrl" alt=""></a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </h5>
+                    </div>
+                    <div class="card-footer postactionlinks">
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Bewerk", "Edit", new { id = item.Id })</span> |
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Details", "Details", new { id = item.Id })</span> |
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Verwijder", "Delete", new { id = item.Id })</span>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.Where(p => p.PostType == EhbEvo.Models.PostType.Plan).Count() == 0)
+        {
+            <div class="card border-0">
+                <div class="card-body border-0">
+                    <p class="">Je hebt nog geen Plannen in verband met dienstverlening gepost.</p>
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+    <hr />
+    <h3 class="text-success shadow h3-padding">Acties</h3>
+    <div class="row">
+        @foreach (var item in Model.Where(p => p.PostType == EhbEvo.Models.PostType.Actie).OrderByDescending(p => p.Date))
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <div class="card-header"><small class="text-success">@item.Date</small></div>
+                    <a href="#"><img class="card-img-top img-thumbpost" src="@item.ImgUrl" alt=""></a>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </h5>
+                    </div>
+                    <div class="card-footer postactionlinks">
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Bewerk", "Edit", new { id = item.Id })</span> |
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Details", "Details", new { id = item.Id })</span> |
+                        <span class="badge badge-pill badge-success">@Html.ActionLink("Verwijder", "Delete", new { id = item.Id })</span>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Model.Where(p => p.PostType == EhbEvo.Models.PostType.Actie).Count() == 0)
+        {
+            <div class="card border-0">
+                <div class="card-body border-0">
+                    <p class="">Je hebt nog geen Acties in verband met dienstverlening gepost.</p>
+                </div>
+
+            </div>
+        }
+    </div>
+    <!-- /.row -->
+    <!-- Pagination -->
+
+</div>
+<!-- /.container -->
+
+<!-- The layout of the page above was copied from a template under the MIT License: 
+    https://startbootstrap.com/template-overviews/4-col-portfolio/
+The MIT License (MIT)
+
+Copyright (c) 2013-2018 Blackrock Digital LLC
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->

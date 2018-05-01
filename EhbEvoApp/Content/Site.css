@@ -1,0 +1,468 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700');
+@import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css");
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.container {
+    max-width: 90%;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.card-deck .col-sm-6 {
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+#footer-hr {
+    clear: both;
+}
+
+/*FEED bootsnipp https://bootsnipp.com/snippets/p10Ko */
+.feedimage {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+.row-section {
+    float: left;
+    width: 100%;
+    background: #f8f9fa; /* fallback for old browsers */
+}
+
+.row-section h2 {
+    float: left;
+    width: 100%;
+    color: #343a40;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.row-section h2 span {
+    font-family: 'Libre Baskerville', serif;
+    display: block;
+    font-size: 45px;
+    text-transform: none;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    font-weight: 700;
+}
+
+.row-section h2 a {
+    color: #343a40;
+}
+
+.row-section .row-block {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.row-section .row-block ul {
+    margin: 0;
+    padding: 0;
+}
+
+.row-section .row-block ul li {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.row-section .row-block ul li:last-child {
+    margin-bottom: 0;
+}
+
+.row-section .row-block ul li:hover {
+    cursor: default;
+}
+
+.row-section .row-block .media {
+    border: 1px solid #d5dbdd;
+    padding: 5px 20px;
+    box-shadow: 0px 2px 1px rgba(0,0,0,0.04);
+    background: #fff;
+}
+
+.row-section .media .media-left img {
+    width: 75px;
+}
+
+.row-section .media .media-body p {
+    padding: 0 15px;
+    font-size: 14px;
+}
+
+.row-section .media .media-body h4 {
+    color: #343a40;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0;
+    padding-left: 14px;
+    margin-top: 12px;
+}
+
+.btn-default {
+    background: #f8f9fa;
+    color: #343a40;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+}
+
+/*POSTS*/
+.h3-padding {
+    display: inline-block;
+    border-radius: 15px;
+    padding: 7px;
+    border: 2px solid;
+}
+
+.img-post {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.img-thumbpost {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+}
+
+.index-onderwijsheader {
+    font-size: 1.5em;
+    display:inline-block;
+    background-color: #007bff;
+    border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    padding: 5px;
+}
+
+.index-onderzoekheader {
+    font-size: 1.5em;
+    display: inline-block;
+    background-color: #ffc107;
+    border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    padding: 5px;
+}
+
+.index-dienstverleningheader {
+    font-size: 1.5em;
+    display: inline-block;
+    background-color: #28a745;
+    border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    padding: 5px;
+}
+
+.index-ondernemenheader {
+    font-size: 1.5em;
+    display: inline-block;
+    background-color: #dc3545;
+    border-radius: 10px;
+    margin: 0px 0px 10px 0px;
+    padding: 5px;
+}
+
+.index-onderwijsheader a:link, .index-onderwijsheader a:visited, .index-onderwijsheader a:hover, .index-onderwijsheader a:active {
+    color: white !important;
+}
+
+.index-dienstverleningheader a:link, .index-dienstverleningheader a:visited, .index-dienstverleningheader a:hover, .index-dienstverleningheader a:active {
+    color: white !important;
+}
+
+.index-ondernemenheader a:link, .index-ondernemenheader a:visited, .index-ondernemenheader a:hover, .index-ondernemenheader a:active {
+    color: white !important;
+}
+
+.index-onderzoekheader a:link, .index-onderzoekheader a:visited, .index-onderzoekheader a:hover, .index-onderzoekheader a:active {
+    color: #212529 !important;
+}
+
+.postactionlinks {
+    opacity: 0.65;
+}
+
+.postactionlinks span{
+    padding-bottom: 5px;
+}
+
+.postactionlinks a:link, .postactionlinks a:visited, .postactionlinks a:hover, .postactionlinks a:active {
+    color: white !important;
+    font-size: 1.2em !important;
+}
+
+.postactionlinksY {
+    opacity: 0.65;
+}
+
+.postactionlinksY span {
+    padding-bottom: 5px;
+}
+
+.postactionlinksY a:link, .postactionlinksY a:visited, .postactionlinksY a:hover, .postactionlinksY a:active {
+   color: #212529 !important;
+    font-size: 1.2em !important;
+}
+
+/*HOME PAGE*/
+#home-jumbotron {
+    margin-top: 30px;
+    background-image: url(images/jumbotron.jpg);
+    background-position: 0% 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 80%;
+}
+
+#home-logo {
+    margin-top: 30px;
+    background-image: url(images/EhB-logo-transparant.png);
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 80%;
+}
+
+#home-onderwijs {
+    margin-top: 10px;
+    background-image: url(images/HOMEonderwijsblue.jpg);
+    background-position: 0% 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 90%;
+}
+
+#home-onderzoek {
+    margin-top: 10px;
+    background-image: url(images/HOMEresearchyellow.jpg);
+    background-position: 0% 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 90%;
+}
+
+#home-dienstverlening {
+    margin-top: 10px;
+    background-image: url(images/HOMEdienstverleninggreen.jpg);
+    background-position: 0% 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 90%;
+}
+
+#home-ondernemen {
+    margin-top: 10px;
+    background-image: url(images/HOMEondernemenred.jpg);
+    background-position: 0% 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 90%;
+}
+
+/* EHBEVO PANEL*/
+
+/*Onderwijs*/
+#evopanel-onderwijs {
+    margin: 0px;
+    padding: 25px 25px;
+    background-image: url(images/HOMEonderwijsblue.jpg);
+    background-position: 0% 40%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 80%;
+}
+
+#onderwijsheader {
+    background-color: #005b96 !important;
+    font-style: oblique;
+    padding: 2px 25px !important;
+    padding-bottom: 10px;
+    margin: 0px;
+}
+
+#onderwijsfooter {
+    background-color: #005b96 !important;
+    font-size: 1.8em;
+    padding: 5px 25px !important;
+    margin-bottom: 0px;
+}
+
+/*Onderzoek*/
+
+#evopanel-onderzoek {
+    margin: 0px;
+    padding: 25px 25px;
+    background-image: url(images/HOMEresearchyellow.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 80%;
+}
+
+
+#onderzoekheader {
+    background-color: #bda800 !important;
+    font-style: oblique;
+    padding: 5px 25px !important;
+    padding-bottom: 10px;
+    margin: 0px;
+}
+
+#onderzoekfooter {
+    background-color: #bda800 !important;
+    font-size: 1.8em;
+    padding: 5px 25px !important;
+    margin-bottom: 0px;
+}
+
+/*Dienstverlening*/
+#evopanel-dienstverlening {
+    margin: 0px;
+    padding: 25px 25px;
+    background-image: url(images/HOMEdienstverleninggreen.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 80%;
+}
+
+#dienstverleningheader {
+    background-color: #36802d !important;
+    font-style: oblique;
+    padding: 5px 25px !important;
+    padding-bottom: 10px;
+    margin: 0px;
+}
+
+#dienstverleningfooter {
+    background-color: #36802d !important;
+    font-size: 1.8em;
+    padding: 5px 25px !important;
+    margin-bottom: 0px;
+}
+
+/*Ondernemen*/
+
+#evopanel-ondernemen {
+    margin: 0px;
+    padding: 25px 25px;
+    background-image: url(images/HOMEondernemenred.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-text-stroke-width: thin;
+    -webkit-text-stroke-color: white;
+    text-shadow: black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em, black 0.0em 0.0em 0.3em;
+    min-width: 100%;
+    max-width: 100%;
+    height: 80%;
+}
+
+#ondernemenheader {
+    background-color: #a31818 !important;
+    font-style: oblique;
+    padding: 5px 25px !important;
+    padding-bottom: 10px;
+    margin: 0px;
+}
+
+#ondernemenfooter {
+    background-color: #a31818 !important;
+    font-size: 1.8em;
+    padding: 5px 25px !important;
+    margin-bottom: 0px;
+}
+
+
+.portfolio-item {
+    padding: 2px;
+    max-width: 98%;
+}
+
+.span-left {
+    float: left;
+}
+
+.span-right {
+    float: right;
+}

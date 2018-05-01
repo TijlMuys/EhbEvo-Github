@@ -1,0 +1,89 @@
+﻿@model IEnumerable<EhbEvo.Models.Feedback>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Feedbackoverzicht</h2>
+
+<p>
+  
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Id Feedback")
+        </th>
+        <th>
+            @Html.DisplayName("Auteur Feedback")
+        </th>
+        <th>
+            @Html.DisplayName("FeedbackTitel")
+        </th>
+        <th>
+            @Html.DisplayName("Beoordeling")
+        </th>
+        <th>
+            @Html.DisplayName("FeedbackComments")
+        </th>
+        <th>
+            @Html.DisplayName("Beoordeelde Post")
+        </th>
+        <th>
+            @Html.DisplayName("Auteur Beoordeelde Post")
+        </th>
+        <th>
+            @Html.DisplayName("Categorie Beoordeelde Post")
+        </th>
+        <th>
+            @Html.DisplayName("Posttype Beoordeelde Post")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @if (item.Rating != null)
+        {
+            @Html.DisplayFor(modelItem => item.Rating)
+    }
+    else
+    {
+        <span>Geen Rating</span>
+}
+
+        </td>
+        <td>
+            @item.Comments.Count()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Post.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Post.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Post.PostCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Post.PostType)
+        </td>
+        <td>
+            @Html.ActionLink("Bewerk", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Verwijder", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

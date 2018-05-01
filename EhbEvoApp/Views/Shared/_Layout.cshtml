@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EhbEvo</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        @Html.ActionLink("EhbEvo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li>@Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })</li>
+                @if(User.IsInRole("Admin") || User.IsInRole("Opleidingshoofd") || User.IsInRole("Opleidingsmedewerker") || User.IsInRole("Docent") || User.IsInRole("Personeel"))
+                {
+                <li>@Html.ActionLink("EvoPanel", "Index", "EvoPanel", null, new { @class = "nav-link" })</li>
+                 }
+                @if(User.IsInRole("Admin") || User.IsInRole("Opleidingshoofd") || User.IsInRole("Opleidingsmedewerker"))
+                {
+                <li>@Html.ActionLink("Feed", "Index", "Feed", null, new { @class = "nav-link" })</li>
+                 }
+                @if(User.IsInRole("Admin"))
+                {
+                <li>@Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })</li>
+                 }
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr id="footer-hr"/>
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Erasmushogeschool Brussel</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/summernote")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

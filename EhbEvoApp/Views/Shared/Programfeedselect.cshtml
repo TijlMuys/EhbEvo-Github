@@ -1,0 +1,20 @@
+﻿@model EhbEvo.Models.Department
+@using EhbEvoApp.Models;
+@{
+    Layout = "";
+}
+
+@if (ViewBag.OwnProgram.ProgramName.Equals("* Meerdere Opleidingen *"))
+{
+    foreach (Program program in Model.Programs)
+    {
+        <option value="@program.ProgramId" @if (program.ProgramId == ViewBag.SelectedProgram) { <text>selected</text> }>@program.ProgramName</option>
+    }
+}
+else
+{
+    <option value="@ViewBag.OwnProgram.ProgramId" @if (ViewBag.OwnProgram.ProgramId == ViewBag.SelectedProgram) { <text>selected</text> }>@ViewBag.OwnProgram.ProgramName</option>
+}
+
+
+

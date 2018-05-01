@@ -1,0 +1,36 @@
+﻿@model EhbEvo.Models.Comment
+
+@{
+    ViewBag.Title = "Delete";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="~/Feed">EvoPanel</a></li>
+        <li class="breadcrumb-item"><a href="~/@Model.Feedback.Post.PostCategory">@Model.Feedback.Post.PostCategory</a></li>
+        <li class="breadcrumb-item"><a href="~/@Model.Feedback.Post.PostCategory/Details/@Model.Feedback.PostId">Details</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Verwijder Commentaar</li>
+    </ol>
+</nav>
+<h2 class="text-dark">Verwijder Commentaar</h2>
+
+<h5 class="text-danger">Ben je zeker dat je de Commentaar wilt verwijderen?</h5>
+<hr />
+<div class="media mt-3">
+    <img class="mr-3 feedimage" src="~/Content/images/comment.png">
+    <div class="media-body">
+        <h5 class="mt-0">@Model.Title - <small class="text-info">@Model.User.FirstName @Model.User.LastName</small><small> op </small><small class="text-secondary">@Model.Date</small></h5>
+        @Html.Raw(Model.Content)
+    </div>
+</div>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-lg btn-danger border-dark" />
+    </div><br />
+    <div class="card-footer postactionlinks">
+        <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Ga terug naar Post", actionName: "Details", controllerName: @Model.Feedback.Post.PostCategory.ToString(), routeValues: new { id = @Model.Feedback.Post.Id }, htmlAttributes: null)</span>
+    </div>
+}

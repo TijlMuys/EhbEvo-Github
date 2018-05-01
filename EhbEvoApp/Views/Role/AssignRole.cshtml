@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "AssignRole";
+}
+
+<h2>Rol Toekennen</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.Label("Kies een gebruikersrol", new {@class = "col-md-2 control-label"})
+        <div class="col-md-10">
+            @Html.DropDownList("UserName")
+        </div>
+    </div>
+    <input type="submit" value="Maak Rol" />
+}
+

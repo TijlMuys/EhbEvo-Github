@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <div class="col-md-10">
+        <div class="jumbotron" id="home-jumbotron">
+            <h1>EhbEvo</h1>
+            <p class="lead">Het ontwikkelingsplatform voor Docenten aan de Erasmushogeschool Brussel.</p>
+            <p class="lead">Post je ideeën, plannen en acties om jezelf en jouw werkomgeving te verbeteren en ontvang rechtstreekse feedback van de opleidingshoofden.</p>
+            <p><a href="@Url.Action("Index", "EvoPanel")" class="btn btn-secondary btn-lg">Beginnen &raquo;</a></p>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="jumbotron" id="home-logo">
+        </div>
+    </div>
+</div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="jumbotron" id="home-onderwijs">
+                <h2>Onderwijs</h2>
+                <p class="lead">Verbeter de manier van lesgeven en draag bij aan een positieve leeromgeving voor de studenten.</p>
+                <p><a href="@Url.Action("Index", "Onderwijs")" class="btn btn-primary btn-lg">Draag bij &raquo;</a></p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="jumbotron" id="home-onderzoek">
+                <h2>Onderzoek</h2>
+                <p class="lead">Sta niet stil, verbreed je kennis en ga op zoek naar nieuwe theorieën, technologieën en mogelijkheden.</p>
+                <p><a href="@Url.Action("Index", "Onderzoek")" class="btn btn-warning btn-lg text-white">Draag bij &raquo;</a></p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="jumbotron" id="home-dienstverlening">
+                <h2>Dienstverlening</h2>
+                <p class="lead">Gebruik je expertise om bij te dragen aan de maatschappij en onze partners, zo kan jij het verschil maken.</p>
+                <p><a href="@Url.Action("Index", "Dienstverlening")" class="btn btn-success btn-lg">Draag bij &raquo;</a></p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="jumbotron" id="home-ondernemen">
+                <h2>Ondernemen</h2>
+                <p class="lead">Steek je handen uit de mouwen en organiseer workshops, lezingen of evenementen aan de hogeschool.</p>
+                <p><a href="@Url.Action("Index", "Ondernemen")" class="btn btn-danger btn-lg">Draag bij &raquo;</a></p>
+            </div>
+        </div>
+    </div>

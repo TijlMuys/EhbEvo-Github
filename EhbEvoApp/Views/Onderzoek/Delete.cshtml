@@ -1,0 +1,72 @@
+﻿@model EhbEvo.Models.Post
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/EvoPanel">EvoPanel</a></li>
+            <li class="breadcrumb-item"><a href="~/Onderzoek">Onderzoek</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Verwijder Post</li>
+        </ol>
+    </nav>
+    <h2 class="text-warningdark">Verwijder Post</h2>
+
+    <h5 class="text-danger">Ben je zeker dat je de post wilt verwijderen?</h5>
+    <hr />
+
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h1 class="mt-4">@Html.DisplayFor(model => model.Title)</h1>
+
+            <!-- Category -->
+            <p>
+                <span class="lead text-warningdark">@Html.DisplayFor(model => model.PostCategory) - @Html.DisplayFor(model => model.PostType)</span><hr>
+                Gepost op <span class="text-secondary">@Html.DisplayFor(model => model.Date)</span> door <span class="text-warning">@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</span>
+            </p>
+
+
+
+            <!-- Date/Time -->
+
+
+            <hr>
+
+            <!-- Preview Image -->
+            <img class="img-fluid rounded img-post" src="@Model.ImgUrl" alt="">
+
+            <hr>
+
+            <!-- Post Content -->
+            @Html.Raw(@Model.Content)
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-large btn-danger border-dark" />
+        </div><br />
+        <div class="card-footer postactionlinksY">
+            <span class="badge badge-pill badge-warning">@Html.ActionLink("Terug naar overzicht", "Index")</span>
+        </div>
+    }
+
+
+</div>
+
+
+
+
+

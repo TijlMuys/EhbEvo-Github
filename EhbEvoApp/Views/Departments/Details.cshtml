@@ -1,0 +1,50 @@
+﻿@model EhbEvo.Models.Department
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Departement - @Html.DisplayFor(model => model.DepartmentName)</h2>
+<h4>Opleidingen</h4>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Opleiding
+            </th>
+            <th>
+                Opleidingstype
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var opleiding in Model.Programs)
+        {
+            <tr>
+                <td>
+                    @opleiding.ProgramName
+                </td>
+                <td>
+                    @opleiding.ProgramType
+                </td>
+                <td>
+                    @if(!opleiding.ProgramName.Equals("* Meerdere Opleidingen *"))
+                    {
+                        @Html.ActionLink(linkText: "Edit", actionName: "Edit", controllerName: "Programs", routeValues: new { id = opleiding.ProgramId }, htmlAttributes: null)<text> | </text>
+                    }
+                    @Html.ActionLink(linkText: "Details", actionName: "Details", controllerName: "Programs", routeValues: new { id = opleiding.ProgramId }, htmlAttributes: null)
+                    @if(!opleiding.ProgramName.Equals("* Meerdere Opleidingen *"))
+                    {
+                        <text> | </text>@Html.ActionLink(linkText: "Delete", actionName: "Delete", controllerName: "Programs", routeValues: new { id = opleiding.ProgramId }, htmlAttributes: null)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DepartmentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

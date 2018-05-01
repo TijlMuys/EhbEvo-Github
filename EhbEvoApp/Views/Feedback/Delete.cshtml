@@ -1,0 +1,51 @@
+﻿@model EhbEvo.Models.Feedback
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/EvoPanel">Feed</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Verwijder Feedback</li>
+        </ol>
+    </nav>
+    <h2 class="text-dark">Verwijder Feedback</h2>
+
+    <h5 class="text-danger">Ben je zeker dat je de feedback wilt verwijderen?</h5>
+    <hr />
+
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h3 class="mt-4">@Html.DisplayFor(model => model.Title)</h3>
+            <p class="lead">
+                Gepost op <span class="text-secondary">@Html.DisplayFor(model => model.Date)</span> door <span class="text-dark">@Html.DisplayFor(model => model.User.FirstName) @Html.DisplayFor(model => model.User.LastName)</span> - <span class="text-info">Rating: @Html.DisplayFor(model => model.Rating)/10</span>
+            </p><hr>
+
+            <!-- Post Content -->
+            @Html.Raw(@Model.Content)
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-lg btn-danger border-dark" />
+        </div><br />
+        <div class="card-footer postactionlinks">
+            <span class="badge badge-pill badge-dark">@Html.ActionLink("Terug naar overzicht", "Index", "Feed")</span>
+        </div>
+    }
+
+
+</div>

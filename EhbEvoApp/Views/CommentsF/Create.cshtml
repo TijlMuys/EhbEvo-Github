@@ -1,0 +1,149 @@
+﻿@model EhbEvo.Models.Comment
+@using Microsoft.AspNet.Identity;
+@using EhbEvoApp.Models;
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@Styles.Render("~/Content/summernote")
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/Feed">Feed</a></li>
+            <li class="breadcrumb-item"><a href="~/Feedback/Details/@ViewBag.Feedback.Id">FeedBack Details</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Nieuwe Commentaar</li>
+        </ol>
+    </nav>
+    <h1 class="text-dark">Nieuwe Commentaar</h1>
+    <hr />
+    <div id="show-feedback-btn" class="btn-dark btn-lg d-inline-block">Bekijk Feedback</div><hr />
+    <div id="feedback" hidden="hidden">
+        <div id="show-post-btn" class="btn-secondary btn d-inline-block" style="opacity: 0.7;">Bekijk originele post</div><hr />
+            <div id="org-post" hidden="hidden">
+                <h3 class="text-dark shadow h3-padding"><span">Originele Post</span></h3>
+
+                <div class="row">
+
+                    <!-- Post Content Column -->
+                    <div class="col-lg-8">
+
+                        <!-- Title -->
+                        <h3 class="mt-4">@ViewBag.Post.Title</h3>
+
+                        <!-- Category -->
+                        <p>
+                            <span class="lead text-dark">@ViewBag.Post.PostCategory - @ViewBag.Post.PostType</span><hr>
+                            Gepost op <span class="text-secondary">@ViewBag.Post.Date</span> door <span class="text-dark">@ViewBag.Post.User.FirstName @ViewBag.Post.User.LastName</span>
+                        </p>
+                        <hr>
+
+                        <!-- Preview Image -->
+                        <img class="img-fluid rounded img-post" src="@ViewBag.Post.ImgUrl" alt="">
+
+                        <hr>
+
+                        <!-- Post Content -->
+                        @Html.Raw(ViewBag.Post.Content)
+                    </div>
+
+                </div>
+                <!-- /.row -->
+                <hr />
+            </div>
+            <h3 class="text-dark shadow h3-padding"><span">Gegeven Feedback</span></h3><br />
+        <div class="row">
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h3 class="mt-4 text-dark">@ViewBag.Feedback.Title</h3>
+                <p class="lead">
+                    Gepost op <span class="text-warningdark">@ViewBag.Feedback.Date</span> door <span class="text-dark">@ViewBag.Feedback.User.FirstName @ViewBag.Feedback.User.LastName</span>
+                    <span class="text-info">
+                        @if (ViewBag.Feedback.Rating != null)
+                        {
+                            <text><span class="text-dark"> - </span> Rating: </text>@ViewBag.Feedback.Rating<text>/10</text>
+                        }
+
+                    </span>
+                </p><hr>
+
+                <!-- Post Content -->
+                @Html.Raw(ViewBag.Feedback.Content)
+            </div>
+        </div>
+        <hr />
+    </div>
+    <div>
+        @foreach (var comment in ViewBag.Feedback.Comments)
+        {
+            <div class="media mt-3">
+                <img class="mr-3 feedimage" src="~/Content/images/comment.png">
+                <div class="media-body">
+                    <h5 class="mt-0">@comment.Title - <small class="text-info">@comment.User.FirstName @comment.User.LastName</small><small> op </small><small class="text-secondary">@comment.Date</small></h5>
+                @Html.Raw(comment.Content)
+                </div>
+        </div><hr />
+        }
+        <h3 class="text-dark shadow h3-padding"><span>Plaats Commentaar</span></h3>
+        <div class="row">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="hidden" name="UserId" value="@System.Web.HttpContext.Current.User.Identity.GetUserId()" />
+                        @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" name="FeedbackId" value="@ViewBag.FeedBack.Id" />
+                    @Html.ValidationMessageFor(model => model.FeedbackId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Content, new { rows = "20", style = "resize:none;width:400px;", placeholder = Html.DisplayNameFor(model => model.Content), @class = "form-control input-lg textarea-editor" })
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="card-footer postactionlinks">
+        <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Ga terug naar Feedback", actionName: "Details", controllerName: "Feedback", routeValues: new { id = ViewBag.Feedback.Id }, htmlAttributes: null)</span>
+    </div>
+</div>
+
+
+
+@section scripts{
+    @Scripts.Render("~/js/summernote-convert.js")
+    @Scripts.Render("~/js/showhidepost.js")
+    @Scripts.Render("~/js/showhidefeedback.js")
+}

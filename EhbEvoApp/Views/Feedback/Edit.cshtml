@@ -1,0 +1,118 @@
+﻿@model EhbEvo.Models.Feedback
+@using Microsoft.AspNet.Identity;
+@using EhbEvoApp.Models;
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@Styles.Render("~/Content/summernote")
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="~/Feed">Feed</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Bewerk Feedback</li>
+        </ol>
+    </nav>
+    <h1 class="text-dark">Bewerk Feedback</h1>
+    <hr />
+    <div id="show-post-btn" class="btn-dark btn-lg d-inline-block">Bekijk originele post</div><hr />
+    <div id="org-post" hidden="hidden">
+        <h2 class="text-dark shadow h3-padding">Originele Post</h2>
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h3 class="mt-4">@Model.Post.Title</h3>
+
+                <!-- Category -->
+                <p>
+                    <span class="lead text-dark">@Model.Post.PostCategory - @Model.Post.PostType</span><hr>
+                    Gepost op <span class="text-secondary">@Model.Post.Date)</span> door <span class="text-dark">@Model.Post.User.FirstName @Model.Post.User.LastName</span>
+                </p>
+                <hr>
+
+                <!-- Preview Image -->
+                <img class="img-fluid rounded img-post" src="@Model.Post.ImgUrl" alt="">
+
+                <hr>
+
+                <!-- Post Content -->
+                @Html.Raw(Model.Post.Content)
+            </div>
+
+        </div>
+        <!-- /.row -->
+        <hr />
+    </div>
+    <div>
+        <h2 class="text-dark shadow h3-padding" id="feedback-begin">Gegeven Feedback</h2>
+        <div class="row">
+
+            @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input type="hidden" name="UserId" value="@System.Web.HttpContext.Current.User.Identity.GetUserId()" />
+                        @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" name="PostId" value="@Model.Post.Id" />
+                    @Html.ValidationMessageFor(model => model.PostId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Feedbacktitel", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Feedback", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Content, new { rows = "20", style = "resize:none;width:400px;", placeholder = Html.DisplayNameFor(model => model.Content), @class = "form-control input-lg textarea-editor" })
+                        @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Beoordeling (optioneel, score op 10)", htmlAttributes: new { @class = "control-label col-md-6" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Bewerk" class="btn btn-dark" />
+                    </div>
+                </div>
+            </div>
+    }
+        </div>
+    </div>
+    <div class="card-footer postactionlinks">
+        <span class="badge badge-pill badge-dark">@Html.ActionLink("Terug naar overzicht", "Index")</span> |
+        <span class="badge badge-pill badge-dark">@Html.ActionLink("Details", "Details", new { id = Model.Id })</span>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/js/summernote-convert.js")
+    @Scripts.Render("~/js/showhidepost.js")
+}

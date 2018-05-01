@@ -1,0 +1,209 @@
+﻿@model EhbEvoApp.Models.FeedView
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Index";
+}
+<section class="row-section">
+    <nav class="navbar navbar-light bg-dark">
+        
+        @using (Html.BeginForm("Filter", "Feed", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <div class="row">
+                <div class="col"><h5 class="text-white">Filter</h5></div>
+                <div class="col">
+                    <label for="begin" class="control-label text-white col-form-label-sm">Begindatum</label>
+                    <input type="date" name="begin" max="3000-12-31"
+                           min="1000-01-01" class="form-control" value="@Model.Filtervalues[0]" style="width: 100%;">
+                </div>
+                <div class="col">
+                    <label for="eind" class="control-label text-white col-form-label-sm">Einddatum</label>
+                    <input type="date" name="eind" max="3000-12-31"
+                           min="1000-01-01" class="form-control" value="@Model.Filtervalues[1]" style="width: 100%;">
+                </div>
+                <div class="col">
+                    <label for="Department" class="control-label text-white col-form-label-sm">Departement</label>
+                    <select class="form-control mr-sm-2" id="Department" name="Department" style="width: 100%;">
+                        @if (ViewBag.AllDepartments == true)
+                        {
+                            foreach (var department in Model.Departementen)
+                            {
+                                <option value="@department.DepartmentId.ToString()" @(@Model.Filtervalues[6].Equals(department.DepartmentId.ToString()) ? "selected" : "none")>@department.DepartmentName</option>
+                            }
+                        }
+                        else
+                        {
+                            foreach (var department in Model.Departementen)
+                            {
+                                if (department.DepartmentId.ToString().Equals(Model.Filtervalues[6]))
+                                {
+                                    <option value="@department.DepartmentId.ToString()" @(@Model.Filtervalues[6].Equals(department.DepartmentId.ToString()) ? "selected" : "none")>@department.DepartmentName</option>
+                                }
+
+                            }
+                        }
+
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="Program" class="control-label text-white col-form-label-sm">Opleiding</label>
+                    <select class="form-control mr-sm-2" id="Program" name="Program" style="width: 100%;" previousId="@Model.Filtervalues[7]"></select>
+                </div>
+                <div class="col">
+                    <label for="soort" class="control-label text-white col-form-label-sm">Soort</label>
+                    <select class="form-control mr-sm-2" id="soort" name="soort" style="width: 100%;">
+                        <option value="-1" @(@Model.Filtervalues[2].Equals("-1") ? "selected" : "none")>Alles</option>
+                        <option value="Posts" @(@Model.Filtervalues[2].Equals("Posts") ? "selected" : "none")>Posts</option>
+                        <option value="Feedback" @(@Model.Filtervalues[2].Equals("Feedback") ? "selected" : "none")>Feedback</option>
+                        <option value="Commentaar" @(@Model.Filtervalues[2].Equals("Commentaar") ? "selected" : "none")>Commentaar</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="UserId" class="control-label text-white col-form-label-sm">Gebruikers</label>
+                    <select class="form-control mr-sm-2" id="UserId" name="UserId" style="width: 100%;">
+                        <option value="-1">Alle Gebruikers</option>
+
+                        @foreach (var user in Model.Users)
+                        {
+                            <option value="@user.Id" @(@Model.Filtervalues[3].Equals(user.Id) ? "selected" : "none")>@user.UserName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="PostType" class="control-label text-white col-form-label-sm">Posttypes</label>
+                    <select class="form-control mr-sm-2" id="PostType" name="PostType" style="width: 100%;">
+                        <option value="-1" @(@Model.Filtervalues[4].Equals("-1") ? "selected" : "none")>Alle Types</option>
+                        <option value="Idee" @(@Model.Filtervalues[4].Equals("Idee") ? "selected" : "none")>Idee</option>
+                        <option value="Plan" @(@Model.Filtervalues[4].Equals("Plan") ? "selected" : "none")>Plan</option>
+                        <option value="Actie" @(@Model.Filtervalues[4].Equals("Actie") ? "selected" : "none")>Actie</option>
+
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="PostCategory" class="control-label text-white col-form-label-sm">Categorieën</label>
+                    <select class="form-control mr-sm-2" id="PostCategory" name="PostCategory" style="width: 100%;">
+                        <option value="-1" @(@Model.Filtervalues[5].Equals("-1") ? "selected" : "none")>Alle Categorieën</option>
+                        <option value="Onderwijs" @(@Model.Filtervalues[5].Equals("Onderwijs") ? "selected" : "none")>Onderwijs</option>
+                        <option value="Onderzoek" @(@Model.Filtervalues[5].Equals("Onderzoek") ? "selected" : "none")>Onderzoek</option>
+                        <option value="Dienstverlening" @(@Model.Filtervalues[5].Equals("Dienstverlening") ? "selected" : "none")>Dienstverlening</option>
+                        <option value="Ondernemen" @(@Model.Filtervalues[5].Equals("Ondernemen") ? "selected" : "none")>Ondernemen</option>
+                    </select>
+                </div>
+                <div class="col align-self-end" style="margin-top:5px;">
+                    <button class="btn btn-info my-2 my-sm-0" type="submit">Filter</button>
+                </div>
+            </div>
+        }
+
+    </nav>
+    <div class="col-md-12 row-block bg-light">
+        <h3>Feed Gebruikersactiviteit</h3>
+        <hr />
+        <ul id="sortable">
+            @foreach (var item in Model.FeedItems.Values)
+            {
+                if (item is EhbEvo.Models.Post)
+                {
+                    EhbEvo.Models.Post post = (EhbEvo.Models.Post)item;
+
+                    <li>
+                        <div class="card feeditem">
+                            <div class="card-header">
+                                <small class="text-secondary">Gepost op: <span class="text-info">@post.Date</span></small><br />
+                                <b class="text-dark">Post</b> - <span class="text-dark"> @post.PostCategory.ToString() (@post.PostType.ToString())</span>
+                            </div>
+                            <a href="#"><img class="card-img-top img-thumbpost" src="" alt=""></a>
+                            <div class="media">
+                                <div class="media-left align-self-center">
+                                    <img class="feedimage" src="@post.ImgUrl">
+                                </div>
+                                <div class="media-body">
+                                    <h4>@post.User.FirstName @post.User.LastName</h4>
+                                    <h4 class="text-secondary" style="font-size: 1em">@post.Title</h4>
+                                </div>
+                            </div>
+                            <!--<p class="card-text">Html.Raw(item.Content)</p>-->
+                            <div class="card-footer postactionlinks">
+                                <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Bekijk", actionName: "Details", controllerName: post.PostCategory.ToString(), routeValues: new { id = post.Id }, htmlAttributes: null)</span> |
+                                <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Geef Feedback", actionName: "Create", controllerName: "Feedback", routeValues: new { postId = post.Id }, htmlAttributes: null)</span> |
+                                <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Verwijder", actionName: "Delete", controllerName: post.PostCategory.ToString(), routeValues: new { id = post.Id }, htmlAttributes: null)</span>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else if (item is EhbEvo.Models.Feedback)
+                {
+                    EhbEvo.Models.Feedback feedback = (EhbEvo.Models.Feedback)item;
+                    <li>
+                        <div class="card feeditem">
+                            <div class="card-header">
+                                <small class="text-secondary">Gepost op: <span class="text-info">@feedback.Date</span></small><br />
+                                <b class="text-dark">Feedback</b> - <span class="text-dark"> @feedback.Post.PostCategory.ToString() (@feedback.Post.PostType.ToString())</span>
+                            </div>
+                            <a href="#"><img class="card-img-top img-thumbpost" src="" alt=""></a>
+                            <div class="media">
+                                <div class="media-left align-self-center">
+                                    <img class="feedimage" src="~/Content/images/feedback.png">
+                                </div>
+                                <div class="media-body">
+                                    <h4>@feedback.Title<small class="text-secondary"> door: </small> @feedback.User.FirstName @feedback.User.LastName</h4>
+                                    <h4 style="font-size: 0.8em"><span class="text-secondary">Voor </span>@feedback.Post.Title <span class="text-secondary"> geschreven door </span> <span class="text-info">@feedback.Post.User.FirstName @feedback.Post.User.LastName</span></h4>
+                                </div>
+                                <div class="media-right align-self-center">
+                                    @if (feedback.Rating != null)
+                                    {
+                                        <b class="text-info">Rating: @feedback.Rating/10 </b>
+                                    }
+                                </div>
+                            </div>
+                            <!--<p class="card-text">Html.Raw(item.Content)</p>-->
+                            <div class="card-footer postactionlinks">
+                                <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Bekijk", actionName: "Details", controllerName: "Feedback", routeValues: new { Id = feedback.Id, postId = feedback.Post.Id }, htmlAttributes: null)</span> |
+                                <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Bewerk", actionName: "Edit", controllerName: "Feedback", routeValues: new { Id = feedback.Id, postId = feedback.Post.Id }, htmlAttributes: null)</span> |
+                                <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Verwijder", actionName: "Delete", controllerName: "Feedback", routeValues: new { Id = feedback.Id, postId = feedback.Post.Id }, htmlAttributes: null)</span>
+                            </div>
+                        </div>
+                    </li>
+                }
+                else if (item is EhbEvo.Models.Comment)
+                {
+                    EhbEvo.Models.Comment comment = (EhbEvo.Models.Comment)item;
+                    <div class="card feeditem">
+                        <div class="card-header">
+                            <small class="text-secondary">Gepost op: <span class="text-info">@comment.Date</span></small><br />
+                            <b class="text-dark">Commentaar</b> - Op Feedback van Post <span class="text-secondary">@comment.Feedback.Post.Title</span> door <span class="text-info">@comment.Feedback.Post.User.FirstName @comment.Feedback.Post.User.LastName</span>
+                        </div>
+                        <a href="#"><img class="card-img-top img-thumbpost" src="" alt=""></a>
+                        <div class="media">
+                            <div class="media-left align-self-center">
+                                <img class="feedimage" src="~/Content/images/comment.png">
+                            </div>
+                            <div class="media-body">
+                                <h4>@comment.User.FirstName @comment.User.LastName</h4>
+                                @if(comment.Title == null)
+                                {
+                                    <h4 class="text-secondary" style="font-size: 1em">Zonder Titel</h4>
+                                }
+                                else
+                                {
+                                    <h4 class="text-secondary" style="font-size: 1em">@comment.Title</h4>
+                                }
+                                
+                            </div>
+                        </div>
+                        <!--<p class="card-text">Html.Raw(item.Content)</p>-->
+                        <div class="card-footer postactionlinks">
+                            <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Bekijk Comment", actionName: "Details", controllerName: "CommentsF", routeValues: new { id = comment.Id }, htmlAttributes: null)</span> |
+                            <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Ga naar Feedback", actionName: "Details", controllerName: "Feedback", routeValues: new { Id = comment.FeedbackId }, htmlAttributes: null)</span> |
+                            <span class="badge badge-pill badge-dark">@Html.ActionLink(linkText: "Verwijder", actionName: "Delete", controllerName: "CommentsF", routeValues: new { id = comment.Id }, htmlAttributes: null)</span>
+                        </div>
+                    </div>
+                }
+
+            }
+        </ul>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/js/feedprogramloader.js")
+}

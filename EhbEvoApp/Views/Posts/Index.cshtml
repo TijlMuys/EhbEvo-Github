@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EhbEvo.Models.Post>
+
+<h2>Postoverzicht (Admin)</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Id Post")
+        </th>
+        <th>
+            @Html.DisplayName("Titel Post")
+        </th>
+        <th>
+            @Html.DisplayName("Auteur Post")
+        </th>
+        <th>
+            @Html.DisplayName("Datum Post")
+        </th>
+        <th>
+            @Html.DisplayName("Categorie Post")
+        </th>
+        <th>
+            @Html.DisplayName("Posttype Post")
+        </th>
+        <th>
+            @Html.DisplayName("Gegeven Feedback")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostCategory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostType)
+        </td>
+        <th>
+            @item.Feedback.Count()
+        </th>
+        <td>
+            @Html.ActionLink(linkText: "Bekijk", actionName: "Details", controllerName: item.PostCategory.ToString(), routeValues: new { id = item.Id }, htmlAttributes: null) |
+            @Html.ActionLink(linkText: "Verwijder", actionName: "Delete", controllerName: item.PostCategory.ToString(), routeValues: new { id = item.Id }, htmlAttributes: null)
+        </td>
+    </tr>
+}
+
+</table>
